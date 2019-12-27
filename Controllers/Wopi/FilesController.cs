@@ -79,9 +79,7 @@ namespace WopiWebApi.Controllers.Wopi
             WopiRequest wreq = new WopiRequest(file_id, access_token, Request);
             if (!wreq.CheckAccessToken())
                 return Unauthorized();
-
-            _logger.LogDebug(wreq.XWOPIOverride);
-
+            
             using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
             {
                 _logger.LogDebug("Check user_info");
@@ -89,9 +87,7 @@ namespace WopiWebApi.Controllers.Wopi
                 _logger.LogDebug(wreq.XWOPIOverride);
                 user_info = reader.ReadToEnd();
             }
-
-            _logger.LogDebug($"User info: {user_info}");
-
+            
             switch (wreq.XWOPIOverride)
             {
                 //Lock/UnlockAndRelock
